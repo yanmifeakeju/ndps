@@ -9,10 +9,12 @@ export const spider = (url, nesting, cb) => {
   fs.readFile(filename, (err) => {
     if (err && err.code !== 'ENOENT') return cb(err);
 
-    download(url, filename, (err, requestContents) => {
+    return download(url, filename, (err, requestContents) => {
       if (err) cb(err);
 
       spiderLinks(url, requestContents, nesting, cb);
     });
   });
+
+  spiderLinks(url, requestContents, nesting, cb);
 };
