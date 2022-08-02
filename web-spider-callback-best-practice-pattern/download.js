@@ -1,11 +1,11 @@
 import superagent from 'superagent';
-import { saveFile } from './savefile.js';
 
-export const download = (url, filename, cb) => {
+export const download = (url, filename, handler, cb) => {
   superagent
     .get(url)
     .then((res) => {
-      saveFile(filename, res.text, cb);
+      console.log(`Downloaded:  ${url}`);
+      handler(filename, res.text, cb);
     })
     .catch(cb);
 };
