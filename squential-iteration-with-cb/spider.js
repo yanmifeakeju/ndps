@@ -9,10 +9,14 @@ export const spider = (url, nesting, cb) => {
   fs.readFile(filename, (err) => {
     if (err && err.code !== 'ENOENT') return cb(err);
 
-    download(url, filename, (err, requestContents) => {
+    // Content doesn't exist, start downloading.
+    return download(url, filename, (err, requestContents) => {
       if (err) cb(err);
 
       spiderLinks(url, requestContents, nesting, cb);
     });
   });
+
+  // Contents already exists, start downloading its link.
+  spiderLinks(url, requestContents, nesting, cb);
 };

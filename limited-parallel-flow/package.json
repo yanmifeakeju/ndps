@@ -1,0 +1,20 @@
+{
+  "name": "web-spider",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "node": ">=14",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "mkdirp": "^1.0.4",
+    "slug": "^5.3.0",
+    "superagent": "^8.0.0"
+  }
+}
