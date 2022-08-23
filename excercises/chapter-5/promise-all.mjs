@@ -21,9 +21,11 @@ const PromiseAll = async (...operations) => {
 };
 
 async function promisedFuncs(seconds) {
-  console.log(seconds);
-  await delay(seconds * 1000);
-  return seconds;
+  return new Promise(async (resolve) => {
+    await delay(seconds * 1000);
+    console.log(seconds);
+    resolve(seconds);
+  });
 }
 
 async function rejectedPromise() {
@@ -34,6 +36,6 @@ PromiseAll(
   promisedFuncs(4),
   promisedFuncs(2),
   promisedFuncs(1),
-  rejectedPromise(),
+
   promisedFuncs(3)
 ).then(console.log, console.error);
