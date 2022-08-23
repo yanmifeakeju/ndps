@@ -4,6 +4,7 @@
  * The function must be functionally equivalent to its original counterpart.
  */
 
+import { resolve } from 'path';
 import { promisify } from 'util';
 
 const delay = promisify(setTimeout);
@@ -21,21 +22,20 @@ const PromiseAll = async (...operations) => {
 };
 
 async function promisedFuncs(seconds) {
-  return new Promise(async (resolve) => {
-    await delay(seconds * 1000);
-    console.log(seconds);
-    resolve(seconds);
-  });
+  await delay(seconds * 1000);
+  console.log(seconds);
+  return seconds;
 }
 
-async function rejectedPromise() {
-  return Promise.reject(new Error('Rejected.'));
+async function rejectedPromise(seconds) {
+  await delay(seconds * 1000);
+  throw new Error('Rejected');
 }
 
 PromiseAll(
   promisedFuncs(4),
   promisedFuncs(2),
   promisedFuncs(1),
-
+  rejectedPromise(2),
   promisedFuncs(3)
 ).then(console.log, console.error);
